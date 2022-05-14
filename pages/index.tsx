@@ -1,18 +1,12 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import { Flex, HStack } from "@chakra-ui/react";
+import React from "react";
+import { Account, Cart, Footer, Logo, Navbar } from "../components";
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>3Delicious</title>
-        <meta name="description" content="3Delicious" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      
-    </div>
+    <>
+      {/* <p>home</p> */}
+    </>
   );
 };
 
