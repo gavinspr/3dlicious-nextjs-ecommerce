@@ -12,10 +12,16 @@
     "@chakra-ui/react": "^2.0.0",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@storyofams/next-api-decorators": "^1.7.2",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
     "framer-motion": "^6",
+    "mongodb": "^4.6.0",
+    "mongoose": "^6.3.3",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-horizontal-scrolling-menu": "^2.7.2",
     "react-icons": "^4.3.1"
   },
   "devDependencies": {

@@ -14,6 +14,7 @@ import {
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
 // todo: underline current page
+// todo: redirect page if invalid route
 
 // type NavItemMenuProps = {
 //   item: string;
@@ -74,6 +75,7 @@ const Navbar = () => {
           <Menu isOpen={showMenu}>
             <Link href="/store">
               <MenuButton
+                p={0}
                 as={Button}
                 fontWeight="normal"
                 background="transparent"
@@ -90,17 +92,17 @@ const Navbar = () => {
               </MenuButton>
             </Link>
             <MenuList
-              backgroundColor="transparent"
+              // backgroundColor="transparent"
               onMouseLeave={() => setShowMenu(false)}
             >
               <MenuItem>
                 <Link href="/store/meals">Meals</Link>
               </MenuItem>
               <MenuItem>
-                <Link href="store/supply">Supply Kits</Link>
+                <Link href="/store/supplies">Supply Kits</Link>
               </MenuItem>
               <MenuItem>
-                <Link href="store/printers">3Dlicious Printers</Link>
+                <Link href="/store/printers">3Dlicious Printers</Link>
               </MenuItem>
             </MenuList>
           </Menu>
@@ -109,6 +111,15 @@ const Navbar = () => {
           </Link>
           <Link href="/contact">
             <Text _hover={{ cursor: "pointer" }}>CONTACT</Text>
+          </Link>
+          <Link href="/manage">
+            <Text
+              fontWeight="bold"
+              // color="green"
+              _hover={{ cursor: "pointer" }}
+            >
+              MANAGE
+            </Text>
           </Link>
         </HStack>
       </HStack>
