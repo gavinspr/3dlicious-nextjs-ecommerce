@@ -6,3 +6,4 @@ export { default as Logo } from "./Logo";
 export { default as Navbar } from "./Navbar";
 export { default as ProductCard } from "./ProductCard";
 export { default as ProductGrid } from "./ProductGrid";
+export { default as SupplyItem } from "./SupplyItem";
