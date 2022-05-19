@@ -1,7 +1,2 @@
-export const PRODUCT_TYPES: string[] = ["Meals", "Supplies", "Printers"];
+export const PRODUCT_TYPES: string[] = ["meals", "supplies", "printers"];
 
-// export enum ProductTypeEnum {
-//   MEALS = "meals",
-//   SUPPLIES = "supplies",
-//   PRINTERS = "printers",
-// }

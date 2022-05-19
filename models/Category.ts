@@ -1,7 +1,6 @@
 import { model, models, Schema } from "mongoose";
-// import { ProductTypeEnum } from "../constants/ProductType";
 
-interface ICategory {
+export interface ICategory {
   name: string;
   slug: string;
   product_type: string;

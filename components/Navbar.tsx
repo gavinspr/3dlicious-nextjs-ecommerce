@@ -1,8 +1,7 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import {
-  Box,
   Button,
-  Center,
   HStack,
   Image,
   Menu,
@@ -11,48 +10,9 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import Link from "next/link";
-import { BsChevronDown } from "react-icons/bs";
-// todo: underline current page
+
+// todo: underline/indicate current page
 // todo: redirect page if invalid route
-
-// type NavItemMenuProps = {
-//   item: string;
-// };
-
-// const NavItemMenu = ({ item }: NavItemMenuProps) => {
-//   const [showMenu, setShowMenu] = useState<boolean>(false);
-//   return (
-//     <Menu isOpen={showMenu}>
-//       <Link href="/store">
-//         <MenuButton
-//           as={Button}
-//           fontWeight="normal"
-//           background="transparent"
-//           rightIcon={<BsChevronDown />}
-//           onClick={() => setShowMenu(false)}
-//           onMouseEnter={() => setShowMenu(true)}
-//           _focus={{ outline: "none" }}
-//           _expanded={{ background: "none" }}
-//           _hover={{ background: "none" }}
-//         >
-//           {item.toLocaleUpperCase()}
-//         </MenuButton>
-//       </Link>
-//       {/* <MenuList backgroundColor="transparent">
-//         <MenuItem>
-//           <Link href="/store/meals">Meals</Link>
-//         </MenuItem>
-//         <MenuItem>
-//           <Link href="store/supply">Supply Kits</Link>
-//         </MenuItem>
-//         <MenuItem>
-//           <Link href="store/printers">3Dlicious Printers</Link>
-//         </MenuItem>
-//       </MenuList> */}
-//     </Menu>
-//   );
-// };
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -64,14 +24,12 @@ const Navbar = () => {
             w={225}
             h={225}
             mr={5}
-            src="/logo_transparent.png"
+            src="/logo.svg"
             aria-label="3Dlicious logo"
+            _hover={{ cursor: "pointer" }}
           />
         </Link>
         <HStack h={20} spacing={6} onMouseLeave={() => setShowMenu(false)}>
-          {/* <NavItemMenu item="shop" /> */}
-          {/* <NavItemMenu item="about" /> */}
-          {/* <NavItemMenu item="contact" /> */}
           <Menu isOpen={showMenu}>
             <Link href="/store">
               <MenuButton
@@ -79,9 +37,6 @@ const Navbar = () => {
                 as={Button}
                 fontWeight="normal"
                 background="transparent"
-                // rightIcon={<BsChevronDown />}
-                // borderWidth={2}
-                // h={10}
                 onClick={() => setShowMenu(false)}
                 onMouseEnter={() => setShowMenu(true)}
                 _focus={{ outline: "none" }}
@@ -91,10 +46,7 @@ const Navbar = () => {
                 SHOP
               </MenuButton>
             </Link>
-            <MenuList
-              // backgroundColor="transparent"
-              onMouseLeave={() => setShowMenu(false)}
-            >
+            <MenuList onMouseLeave={() => setShowMenu(false)}>
               <MenuItem>
                 <Link href="/store/meals">Meals</Link>
               </MenuItem>
@@ -112,7 +64,7 @@ const Navbar = () => {
           <Link href="/contact">
             <Text _hover={{ cursor: "pointer" }}>CONTACT</Text>
           </Link>
-          <Link href="/manage">
+          {/* <Link href="/manage">
             <Text
               fontWeight="bold"
               // color="green"
@@ -120,7 +72,7 @@ const Navbar = () => {
             >
               MANAGE
             </Text>
-          </Link>
+          </Link> */}
         </HStack>
       </HStack>
       <HStack pos="absolute" top="3vh" right="4%" spacing={30}>

@@ -1,18 +1,19 @@
 import { model, models, Schema } from "mongoose";
 
-interface IProduct {
+export interface IProduct {
   name: string;
   slug: string;
+  product_type: string;
   categories: string[];
   image: string;
   price: number;
   rating: number;
-  reviewCount: number;
-  stockCount: number;
-  cookTime: number;
-  servings: number;
-  nutritionalFacts: string;
-  requiredSupplies: string[];
+  review_count: number;
+  stock_count: number | null;
+  cook_time: number | null;
+  servings: number | null;
+  nutritional_facts: string | null;
+  required_supplies: string[] | null;
   description: string;
 }
 
@@ -20,16 +21,17 @@ const productSchema = new Schema<IProduct>(
   {
     name: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
+    product_type: { type: String, required: true },
     categories: { type: [String], required: true },
     image: { type: String, required: true },
     price: { type: Number, required: true },
     rating: { type: Number, required: true, default: 0 },
-    reviewCount: { type: Number, required: true, default: 0 },
-    stockCount: { type: Number, required: true, default: 0 },
-    cookTime: { type: Number, required: true },
+    review_count: { type: Number, required: true, default: 0 },
+    stock_count: { type: Number, required: true, default: 0 },
+    cook_time: { type: Number, required: true },
     servings: { type: Number, required: true },
-    nutritionalFacts: { type: String, required: true },
-    requiredSupplies: { type: [String], required: true },
+    nutritional_facts: { type: String, required: true },
+    required_supplies: { type: [String], required: true },
     description: { type: String, required: true },
   },
   {

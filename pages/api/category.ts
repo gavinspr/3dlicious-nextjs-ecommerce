@@ -1,47 +1,49 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../utils/mongo";
-import { Category } from "../../models";
-import {
-  createHandler,
-  Post,
-  Delete,
-  Get,
-  Query,
-  Body,
-  Req,
-} from "@storyofams/next-api-decorators";
-// import { api, ApiController } from "next-controller";
-// import { Get, NextApiContext, withController } from "next-controllers";
+import { Category, ICategory } from "../../models";
 
-type Data = {
-  name: string;
-};
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<ICategory[]>
+) {
+  const {
+    body,
+    method,
+    query: { product_type },
+  } = req;
 
-class CategoryController {
-  @Get()
-  async fetchCategories(
-    @Query("product_type") product_type: string
-  ): Promise<any[]> {
-    await dbConnect();
+  await dbConnect();
 
-    const categories = await Category.find({
-      product_type: product_type,
-    });
+  switch (method) {
+    case "GET":
+      const categories: ICategory[] = await Category.find({
+        product_type,
+      });
 
-    if (!categories) {
-      // throw new NotFoundException('Category not found.');
-      console.log("no");
-    }
+      if (!categories) {
+        //todo: 
+        // throw new NotFoundException('Category not found.');
+        console.log("no");
+      }
 
-    return categories;
-  }
+      res.status(200).json(categories);
+      break;
+    case "POST":
+      let response;
 
-  @Post()
-  async addCategory(@Body() body: any) {
-    await dbConnect();
+      try {
+        response = await Category.create(body);
+      } catch (err) {
+        console.log(err);
+        response = err;
+      }
 
-    return await Category.create(body);
+      res.status(201).json(response);
+
+      break;
+
+    default:
+      break;
   }
 }
 
-export default createHandler(CategoryController);

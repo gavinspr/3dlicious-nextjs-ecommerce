@@ -4,3 +4,5 @@ export { default as CategoryList } from "./CategoryList";
 export { default as Footer } from "./Footer";
 export { default as Logo } from "./Logo";
 export { default as Navbar } from "./Navbar";
+export { default as ProductCard } from "./ProductCard";
+export { default as ProductGrid } from "./ProductGrid";

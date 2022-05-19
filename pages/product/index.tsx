@@ -3,19 +3,16 @@ import { Center } from "@chakra-ui/react";
 import { PRODUCT_TYPES } from "../../constants/ProductType";
 import { CategoryList } from "../../components";
 
-const StoreFront = () => {
+// todo: rethink this page or use better logic to redirect to storefront
+
+const ProductFront = () => {
   return (
     <Center gap={4} w="100%" top="22vh" pos="absolute" flexDir="column">
       {PRODUCT_TYPES.map((element: any, index: any) => (
-        <CategoryList
-          key={index}
-          title={element}
-          index={index}
-          storefront={true}
-        />
+        <CategoryList title={element} index={index} storefront={true} />
       ))}
     </Center>
   );
 };
 
-export default StoreFront;
+export default ProductFront;
