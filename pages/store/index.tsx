@@ -1,6 +1,6 @@
 import React from "react";
 import { Center } from "@chakra-ui/react";
-import { PRODUCT_TYPES } from "../../constants/ProductType";
+import { PRODUCT_TYPES } from "../../constants";
 import { CategoryList } from "../../components";
 
 const StoreFront = () => {

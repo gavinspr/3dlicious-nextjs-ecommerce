@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { PRODUCT_TYPES } from "../constants/ProductType";
+import { PRODUCT_TYPES } from "../constants/";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import { ICategory } from "../models";
 import { Avatar, Heading, HStack, Text, VStack } from "@chakra-ui/react";

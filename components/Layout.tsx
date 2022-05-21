@@ -17,10 +17,10 @@ const Layout = ({ children }: LayoutProps) => {
         <Navbar />
       </header>
       <main>
-      <Center w="100%" gap={4} flexDir="column" pos="absolute" top="20vh">
-        
-        {children}
-        </Center></main>
+        <Center w="100%" gap={4} flexDir="column" pos="absolute" top="20vh">
+          {children}
+        </Center>
+      </main>
       <footer>
         <Footer />
       </footer>

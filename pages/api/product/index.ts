@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../utils/mongo";
 import { Product, IProduct } from "../../../models";
-import { PRODUCT_TYPES } from "../../../constants/ProductType";
+import { PRODUCT_TYPES } from "../../../constants";
 
 export default async function handler(
   req: NextApiRequest,
