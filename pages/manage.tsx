@@ -7,7 +7,7 @@ import axios from "axios";
 const ManageSidebar = () => {
   const handleAddCategory = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/category");
+      const res = await axios.get("/api/category");
       console.log(res);
     } catch (err) {
       console.log(err);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { Center } from "@chakra-ui/react";
 import { CategoryList, ProductGrid } from "../../components";
@@ -10,13 +10,17 @@ const Store = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const title: string = id!.at(-1) as string;
-
   return (
-    <Center w="100%" gap={4} flexDir="column" pos="absolute" top="20vh">
-      <CategoryList title={title} index={0} storefront={false} />
-      <ProductGrid title={title} />
-    </Center>
+    id && (
+      <>
+        <CategoryList
+          title={id.at(-1) as string}
+          index={0}
+          storefront={false}
+        />
+        <ProductGrid title={id.at(-1) as string} />
+      </>
+    )
   );
 };
 

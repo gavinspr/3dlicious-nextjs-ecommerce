@@ -1,3 +1,4 @@
+import { Center } from "@chakra-ui/react";
 import Head from "next/head";
 import React from "react";
 import { Footer, Navbar } from "../components";
@@ -15,7 +16,11 @@ const Layout = ({ children }: LayoutProps) => {
       <header>
         <Navbar />
       </header>
-      <main>{children}</main>
+      <main>
+      <Center w="100%" gap={4} flexDir="column" pos="absolute" top="20vh">
+        
+        {children}
+        </Center></main>
       <footer>
         <Footer />
       </footer>
