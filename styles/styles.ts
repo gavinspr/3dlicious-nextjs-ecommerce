@@ -18,6 +18,9 @@ export const theme = extendTheme({
         // backgroundImage: "/background1.jpg",
         // backgroundImage: "/background3.jpg",
         backgroundSize: "100%",
+        "&::-webkit-scrollbar": {
+          display: "none",
+        },
       },
       a: {
         color: "inherit",

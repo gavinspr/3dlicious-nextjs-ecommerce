@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Cart from "./Cart";
 import {
   Button,
   HStack,
@@ -9,6 +10,7 @@ import {
   MenuItem,
   MenuList,
   Text,
+  Tooltip,
 } from "@chakra-ui/react";
 
 // todo: underline/indicate current page
@@ -16,6 +18,7 @@ import {
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
+
   return (
     <>
       <HStack pos="absolute" top={0} left="4%">
@@ -47,15 +50,21 @@ const Navbar = () => {
               </MenuButton>
             </Link>
             <MenuList onMouseLeave={() => setShowMenu(false)}>
-              <MenuItem>
-                <Link href="/store/meals">Meals</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link href="/store/supplies">Supply Kits</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link href="/store/printers">3Dlicious Printers</Link>
-              </MenuItem>
+              <Link href="/store/meals">
+                <MenuItem>
+                  <Text>Meals</Text>
+                </MenuItem>
+              </Link>
+              <Link href="/store/supplies">
+                <MenuItem>
+                  <Text>Supply Kits</Text>
+                </MenuItem>
+              </Link>
+              <Link href="/store/printers">
+                <MenuItem>
+                  <Text>3Dlicious Printers</Text>
+                </MenuItem>
+              </Link>
             </MenuList>
           </Menu>
           <Link href="/about">
@@ -75,17 +84,13 @@ const Navbar = () => {
           </Link> */}
         </HStack>
       </HStack>
+
       <HStack pos="absolute" top="3vh" right="4%" spacing={30}>
-        <Link href="/cart">
-          <Image
-            w={50}
-            h={50}
-            src="shopping-plate1.png"
-            aria-label="Shopping Cart"
-          />
-        </Link>
+        <Cart />
         <Link href="/account">
-          <Image src="account.png" w={50} h={50} aria-label="Account" />
+          <Tooltip label="Account">
+            <Image src="/account.png" w={50} h={50} aria-label="Account" />
+          </Tooltip>
         </Link>
       </HStack>
     </>

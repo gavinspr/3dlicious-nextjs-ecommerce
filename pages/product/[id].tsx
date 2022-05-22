@@ -21,12 +21,21 @@ import {
   Tooltip,
   VStack,
 } from "@chakra-ui/react";
+import { useCartContext } from "../../context";
 
 const Product = () => {
+  const [product, setProduct] = useState<IProduct>();
+  const [inCart, setInCart] = useState<boolean>(false);
+
   const router = useRouter();
   const { id } = router.query;
 
-  const [product, setProduct] = useState<IProduct>();
+  const { addCartItem, isInCart } = useCartContext();
+
+  const handleAddToCart = () => {
+    addCartItem(product!);
+    if (!inCart) setInCart(true);
+  };
 
   const fetchProduct = async () => {
     try {
@@ -34,6 +43,7 @@ const Product = () => {
 
       setProduct(res.data);
     } catch (err) {
+      // todo:
       console.log(err);
     }
   };
@@ -41,6 +51,11 @@ const Product = () => {
   useEffect(() => {
     fetchProduct();
   }, [id]);
+
+  useEffect(() => {
+    const isItemInCart: boolean = isInCart(product!);
+    setInCart(isItemInCart);
+  }, [product]);
 
   return (
     product && (
@@ -122,9 +137,12 @@ const Product = () => {
               size="lg"
               iconSpacing={6}
               colorScheme="green"
+              borderWidth={2}
               rightIcon={<TiShoppingCart size={25} />}
+              variant={inCart ? "outline" : "solid"}
+              onClick={handleAddToCart}
             >
-              Add To Cart
+              {inCart ? "Item In Cart" : "Add To Cart"}
             </Button>
           </Box>
         </VStack>

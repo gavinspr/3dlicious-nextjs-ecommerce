@@ -3,21 +3,33 @@ import Link from "next/link";
 import { IProduct } from "../models/Product";
 import { MdStar } from "react-icons/md";
 import { IoIosPeople, IoMdStopwatch } from "react-icons/io";
-import { BsBagPlusFill } from "react-icons/bs";
+import { BsBagPlusFill, BsBagCheck } from "react-icons/bs";
 import { GiPaperBagOpen } from "react-icons/gi";
 import { Heading, HStack, Icon, Image, Text, VStack } from "@chakra-ui/react";
+import { CartItem, useCartContext } from "../context";
 
 type ProductCardProps = {
   product: IProduct;
 };
 
+// todo: add multiple qty on product page
+
 const ProductCard = ({ product }: ProductCardProps) => {
+  const [inCart, setInCart] = useState<boolean>(false);
+
   const descriptionPreviewCount: number = 50;
 
-  const handleAddItem = () => {
-    // todo:
-    console.log("yee");
+  const { addCartItem, isInCart } = useCartContext();
+
+  const handleAddToCart = () => {
+    addCartItem(product);
+    if (!inCart) setInCart(true);
   };
+
+  useEffect(() => {
+    const isItemInCart: boolean = isInCart(product!);
+    setInCart(isItemInCart);
+  }, []);
 
   return (
     <VStack
@@ -94,11 +106,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </Text>
           </Link>
           <Icon
-            as={BsBagPlusFill}
+            as={inCart ? BsBagCheck : BsBagPlusFill}
             w="20%"
             h="50%"
             color="green"
-            onClick={handleAddItem}
+            onClick={handleAddToCart}
             _hover={{ cursor: "pointer" }}
           />
         </HStack>
