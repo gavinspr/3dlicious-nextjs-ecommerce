@@ -12,22 +12,32 @@ import {
   Text,
   Tooltip,
   Flex,
+  Spinner,
 } from "@chakra-ui/react";
 import { useRouter, NextRouter } from "next/router";
 import NavbarItem from "./NavbarItem";
+import { IProductCategory } from "../../models/ProductCategory";
+import fetchProductCategories from "../../utils/fetchProductCategories";
 
 // todo: underline/indicate current page; need to decide color an supporting style
 // todo: redirect page if invalid route
 // todo: shop menu items need to come from backend endpoint
 // todo: have menu items alternate background colors
 // todo: make home icon shake on hover
-// todo: fix menu
+// todo: fix menu popover shift; make from scratch
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<string>("");
+  const [productCategories, setProductCategories] = useState<
+    Array<IProductCategory>
+  >([]);
 
   const router: NextRouter = useRouter();
+
+  useEffect(() => {
+    fetchProductCategories(setProductCategories);
+  }, []);
 
   useEffect(() => {
     setCurrentPage(router.pathname.substring(1));
@@ -73,21 +83,26 @@ const Navbar = () => {
             </MenuButton>
           </Link>
           <MenuList onMouseLeave={() => setShowMenu(false)}>
-            <Link href="/store/meals">
-              <MenuItem>
-                <Text>Meals</Text>
-              </MenuItem>
-            </Link>
-            <Link href="/store/supplies">
-              <MenuItem>
-                <Text>Supply Kits</Text>
-              </MenuItem>
-            </Link>
-            <Link href="/store/printers">
-              <MenuItem>
-                <Text>3Dlicious Printers</Text>
-              </MenuItem>
-            </Link>
+            {productCategories.length !== 0 ? (
+              productCategories.map((category: IProductCategory) => (
+                <Link key={`${category._id}`} href={`/store/${category.slug}`}>
+                  <MenuItem>
+                    <Text>{category.name}</Text>
+                  </MenuItem>
+                </Link>
+              ))
+            ) : (
+              <Flex justify="center" height="10vh">
+                <Spinner
+                  thickness="4px"
+                  speed="0.65s"
+                  emptyColor="gray.200"
+                  color="blue.500"
+                  size="xl"
+                  alignSelf="center"
+                />
+              </Flex>
+            )}
           </MenuList>
         </Menu>
         <NavbarItem
