@@ -1,6 +1,6 @@
+import React from "react";
 import { Center } from "@chakra-ui/react";
 import Head from "next/head";
-import React from "react";
 import { Footer, Navbar } from "../components";
 
 type LayoutProps = {
@@ -17,7 +17,7 @@ const Layout = ({ children }: LayoutProps) => {
         <Navbar />
       </header>
       <main>
-        <Center w="100%" gap={4} flexDir="column" pos="absolute" top="20vh">
+        <Center mx="2%" gap={4} flexDir="column">
           {children}
         </Center>
       </main>

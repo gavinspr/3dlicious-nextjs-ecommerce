@@ -14,10 +14,6 @@ export const theme = extendTheme({
       body: {
         padding: 0,
         margin: 0,
-        backgroundImage: "/background.jpg",
-        // backgroundImage: "/background1.jpg",
-        // backgroundImage: "/background3.jpg",
-        backgroundSize: "100%",
         "&::-webkit-scrollbar": {
           display: "none",
         },

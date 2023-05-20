@@ -100,8 +100,7 @@ const Cart = () => {
           <Tag
             pos="absolute"
             top={0}
-            right={-2}
-            size="sm"
+            right={-1}
             color="white"
             borderRadius="full"
             background="green.500"
@@ -110,8 +109,8 @@ const Cart = () => {
           </Tag>
           <PopoverTrigger>
             <Image
-              w={50}
-              h={50}
+              w={65}
+              h={65}
               src="/shopping-plate1.png"
               aria-label="Shopping Cart"
               _hover={{ cursor: "pointer" }}
