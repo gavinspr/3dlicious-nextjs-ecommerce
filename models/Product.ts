@@ -8,8 +8,8 @@ export interface IProduct {
   _id: ObjectId
   name: string
   slug: string
-  product_category: string
-  sub_categories: Array<string>
+  product_category: ObjectId | string
+  sub_categories: Array<ObjectId | string>
   image_url: string | null
   price: number
   rating: number // out of 5
@@ -24,8 +24,18 @@ const productSchema = new Schema<IProduct>(
   {
     name: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
-    product_category: { type: String, required: true },
-    sub_categories: { type: [String], required: true },
+    product_category: {
+      type: Schema.Types.ObjectId,
+      ref: 'ProductCategory',
+      required: true,
+    },
+    sub_categories: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'SubCategory',
+        required: true,
+      },
+    ],
     image_url: { type: String, default: null },
     price: { type: Number, required: true },
     rating: { type: Number, required: true, default: 0 },

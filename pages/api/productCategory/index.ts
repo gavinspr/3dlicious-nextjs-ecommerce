@@ -1,34 +1,57 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import ProductCategory, { IProductCategory } from "../../../models/ProductCategory";
-import dbConnect from "../../../utils/mongo";
+import { NextApiRequest, NextApiResponse } from 'next'
+import { getProductCategoryBySlug } from '../../../controllers'
+import ProductCategory, {
+  IProductCategory,
+} from '../../../models/ProductCategory'
+import dbConnect from '../../../utils/mongo'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-
-  const { method, } = req
-
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   await dbConnect()
 
-  switch (method) {
-    case "GET":
-      const productCategories: Array<IProductCategory> = await ProductCategory.find()
-      res.status(200).json(productCategories);
-      break;
+  switch (req.method) {
+    case 'GET':
+      try {
+        let productCategories: Array<IProductCategory> = []
 
-    case "POST":
+        if (req.query.slug) {
+          productCategories = await getProductCategoryBySlug(
+            req.query.slug as string,
+          )
+
+          return res.status(200).json(productCategories)
+        }
+
+        productCategories = await ProductCategory.find()
+
+        // Sort ProductCategories by index
+        if (req.query.byIndex) {
+          productCategories.sort(
+            (a: IProductCategory, b: IProductCategory) => a.index - b.index,
+          )
+        }
+
+        res.status(200).json(productCategories)
+      } catch (error) {
+        console.log(error, 'e')
+        res.status(400).json(error)
+      }
+      break
+    case 'POST':
       const body = JSON.parse(req.body)
 
       try {
         const productCategory = await ProductCategory.create(body)
         res.status(201).json(productCategory)
-      } catch (error: any) {
+      } catch (error) {
         console.log(error, 'e')
         res.status(400).json(error)
       }
-
-      break;
-
+      break
     default:
-      //todo:
-      break;
+      res.status(405).json({ message: 'Method Not Allowed' })
+      break
   }
 }
