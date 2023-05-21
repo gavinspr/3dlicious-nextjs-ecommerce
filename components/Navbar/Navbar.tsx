@@ -44,7 +44,14 @@ const Navbar = () => {
   }, [router.pathname]);
 
   return (
-    <Flex mx="2%" mt="1%" align="center" position="relative">
+    <Flex
+      px="2%"
+      pt="1%"
+      align="center"
+      position="relative"
+      borderBottom="20px solid"
+      borderColor={"green.600"}
+    >
       <Link href="/">
         <Image
           w={225}
@@ -121,7 +128,7 @@ const Navbar = () => {
           onMouseEnter={() => setShowMenu(false)}
         />
       </HStack>
-      <HStack pos="absolute" top="10%" right="2%" spacing={30}>
+      <HStack pos="absolute" top="10%" right="4%" spacing={30}>
         <Cart />
         <Link href="/account">
           <Tooltip label="Account">

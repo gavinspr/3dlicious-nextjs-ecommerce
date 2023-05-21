@@ -8,3 +8,5 @@ export { default as ProductGrid } from "./ProductGrid";
 export { default as SupplyItem } from "./SupplyItem";
 export { default as CategoryCarousel } from "./CategoryCarousel/CategoryCarousel";
 export { default as AdvertisementWindow } from "./AdvertisementWindow/AdvertisementWindow";
+export { default as ManageCategories } from "./ManageCategories/ManageCategories";
+export { default as ManageGrid } from "./ManageGrid/ManageGrid";

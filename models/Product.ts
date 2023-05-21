@@ -1,45 +1,45 @@
-import { model, models, ObjectId, Schema } from "mongoose";
+import { model, models, ObjectId, Schema } from 'mongoose'
 
+// todo: relate to product category & sub categories
+// todo: link to reviews
+// nutritional_facts: Record<string, string> | null // todo: make into linking object
+// required_supplies: Record<string, string> | null // todo: make into linking object
 export interface IProduct {
-  _id: ObjectId;
-  name: string;
-  slug: string;
-  product_type: string;
-  categories: string[];
-  image: string;
-  price: number;
-  rating: number;
-  review_count: number;
-  stock_count: number | null;
-  cook_time: number | null;
-  servings: number | null;
-  nutritional_facts: string | null;
-  required_supplies: string[] | null;
-  description: string;
+  _id: ObjectId
+  name: string
+  slug: string
+  product_category: string
+  sub_categories: Array<string>
+  image_url: string | null
+  price: number
+  rating: number // out of 5
+  review_count: number
+  stock_count: number | null
+  cook_time: number | null
+  servings: number | null
+  description: string
 }
 
 const productSchema = new Schema<IProduct>(
   {
     name: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
-    product_type: { type: String, required: true },
-    categories: { type: [String], required: true },
-    image: { type: String, required: true },
+    product_category: { type: String, required: true },
+    sub_categories: { type: [String], required: true },
+    image_url: { type: String, default: null },
     price: { type: Number, required: true },
     rating: { type: Number, required: true, default: 0 },
     review_count: { type: Number, required: true, default: 0 },
-    stock_count: { type: Number, required: true, default: 0 },
-    cook_time: { type: Number, required: true },
-    servings: { type: Number, required: true },
-    nutritional_facts: { type: String, required: true },
-    required_supplies: { type: [String], required: true },
+    stock_count: { type: Number, default: null },
+    cook_time: { type: Number, default: null },
+    servings: { type: Number, default: null },
     description: { type: String, required: true },
   },
   {
     timestamps: true,
-  }
-);
+  },
+)
 
-const Product = models.Product || model<IProduct>("Product", productSchema);
+const Product = models.Product || model<IProduct>('Product', productSchema)
 
-export default Product;
+export default Product
