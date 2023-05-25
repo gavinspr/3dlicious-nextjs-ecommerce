@@ -5,8 +5,8 @@ export const theme = extendTheme({
   styles: {
     global: (props: ThemeComponentProps) => ({
       css: {
-        outline: " none",
-        boxShadow: " none",
+        outline: "none",
+        boxShadow: "none",
         _focus: {
           outline: "none",
         },
@@ -14,9 +14,7 @@ export const theme = extendTheme({
       body: {
         padding: 0,
         margin: 0,
-        "&::-webkit-scrollbar": {
-          display: "none",
-        },
+        overflowX: "hidden",
       },
       a: {
         color: "inherit",

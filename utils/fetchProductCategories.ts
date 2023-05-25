@@ -1,10 +1,13 @@
 import { IProductCategory } from "../models/ProductCategory";
 
 type OptionTypes = {
-  byIndex?: boolean
-}
+  byIndex?: boolean;
+};
 
-const fetchProductCategories = async (setProductCategories: Function, options?: OptionTypes) => {
+const fetchProductCategories = async (
+  setProductCategories: Function,
+  options?: OptionTypes
+) => {
   const response: Response = await fetch("/api/productCategory");
 
   const data: Array<IProductCategory> = await response.json();
@@ -12,8 +15,7 @@ const fetchProductCategories = async (setProductCategories: Function, options?: 
   if (options?.byIndex)
     data.sort((a: IProductCategory, b: IProductCategory) => a.index - b.index);
 
-
   setProductCategories(data);
 };
 
-export default fetchProductCategories
+export default fetchProductCategories;

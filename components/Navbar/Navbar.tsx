@@ -21,7 +21,6 @@ import fetchProductCategories from "../../utils/fetchProductCategories";
 
 // todo: underline/indicate current page; need to decide color an supporting style
 // todo: redirect page if invalid route
-// todo: shop menu items need to come from backend endpoint
 // todo: have menu items alternate background colors
 // todo: make home icon shake on hover
 // todo: fix menu popover shift; make from scratch
@@ -36,11 +35,11 @@ const Navbar = () => {
   const router: NextRouter = useRouter();
 
   useEffect(() => {
-    fetchProductCategories(setProductCategories);
+    fetchProductCategories(setProductCategories, { byIndex: true });
   }, []);
 
   useEffect(() => {
-    setCurrentPage(router.pathname.substring(1));
+    setCurrentPage(router.pathname.substring(1).split("/")[0]);
   }, [router.pathname]);
 
   return (

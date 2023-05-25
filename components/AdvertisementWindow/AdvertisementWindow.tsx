@@ -6,7 +6,7 @@ const AdvertisementWindow = () => {
     <HStack
       outline="1px solid red"
       h="15vh" // temp
-      mx="12%"
+      mx="4%"
       my="2em"
     >
       <p>todo advertisement</p>

@@ -36,10 +36,11 @@ const ScrollToTopButton = () => {
       <IconButton
         aria-label="Scroll to top"
         icon={<FaChevronUp />}
-        size="md"
+        size="lg"
         onClick={handleScrollToTop}
         bg="green.500"
         color="white"
+        opacity="0.7"
         _hover={{ bg: "green.600" }}
         _active={{ bg: "green.700" }}
       />

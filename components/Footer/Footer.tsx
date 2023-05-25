@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Center,
-  Container,
-  Flex,
-  HStack,
-  Text,
-  Button,
-  Icon,
-  IconButton,
-} from "@chakra-ui/react";
+import { Center, Flex, HStack, Text } from "@chakra-ui/react";
 import { FaTwitter, FaPinterestP, FaFacebookF } from "react-icons/fa";
 import { ImInstagram } from "react-icons/im";
 import FooterItem from "./FooterItem";
@@ -19,7 +9,14 @@ const timeTravelFactor: number = 20;
 
 const Footer = () => {
   return (
-    <Flex flexDir="column" borderTop="2px solid black" mt="2%" gap={2}>
+    <Flex
+      flexDir="column"
+      borderTop="2px solid"
+      borderColor="green.600"
+      mt="2%"
+      gap={10}
+      // mb="2%"
+    >
       <HStack mx="2%" mt={2} justify="space-between">
         <HStack gap={8}>
           <FooterItem>Terms Of Service</FooterItem>
@@ -36,9 +33,7 @@ const Footer = () => {
         </HStack>
       </HStack>
       <Center mx="2%" pb={1}>
-        <Text fontSize={14}>
-          3Dlicious © {new Date().getFullYear() + timeTravelFactor}
-        </Text>
+        <Text>3Dlicious © {new Date().getFullYear() + timeTravelFactor}</Text>
       </Center>
     </Flex>
   );
