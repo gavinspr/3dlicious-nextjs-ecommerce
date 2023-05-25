@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/router";
-import { IProduct } from "../../models";
-import { SupplyItem } from "../../components";
+import { IProduct } from "../../../models";
+import { SupplyItem } from "../../../components";
 import { IoReturnDownBackOutline } from "react-icons/io5";
 import { MdStar } from "react-icons/md";
 import { IoIosPeople, IoMdStopwatch } from "react-icons/io";
@@ -10,7 +9,6 @@ import { TiShoppingCart } from "react-icons/ti";
 import {
   Box,
   Button,
-  Center,
   Container,
   Heading,
   HStack,
@@ -21,10 +19,18 @@ import {
   Tooltip,
   VStack,
 } from "@chakra-ui/react";
-import { useCartContext } from "../../context";
+import { useCartContext } from "../../../context";
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  GetServerSidePropsResult,
+} from "next";
 
-const Product = () => {
-  const [product, setProduct] = useState<IProduct>();
+type PropTypes = {
+  product: IProduct;
+};
+
+const Product = ({ product }: PropTypes) => {
   const [inCart, setInCart] = useState<boolean>(false);
 
   const router = useRouter();
@@ -37,21 +43,7 @@ const Product = () => {
     if (!inCart) setInCart(true);
   };
 
-  const fetchProduct = async () => {
-    try {
-      const res = await axios.get(`/api/product/${id}`);
-
-      setProduct(res.data);
-    } catch (err) {
-      // todo:
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchProduct();
-  }, [id]);
-
+  // !
   useEffect(() => {
     const isItemInCart: boolean = isInCart(product!);
     setInCart(isItemInCart);
@@ -82,7 +74,7 @@ const Product = () => {
           {product.description}
         </Container>
         <VStack pos="absolute" right={0} h="100%" w="50%" top={16}>
-          <Image w="50%" h="50%" borderRadius={12} src={product.image} />
+          <Image w="50%" h="50%" borderRadius={12} src={"/dandan.jpg"} />
           <HStack w="50%" spacing={16}>
             <HStack
               // todo: onclick go to reviews
@@ -123,12 +115,12 @@ const Product = () => {
             <Tooltip label="Required Supplied">
               <Heading fontSize={16}>Supplies:</Heading>
             </Tooltip>
-            {
+            {/* {
               // todo: horizontal scroll if overflow
               product.required_supplies?.map((supply: any, index: any) => (
                 <SupplyItem key={index} type={supply} />
               ))
-            }
+            } */}
           </HStack>
           <Box w="50%">
             <Button
@@ -150,6 +142,31 @@ const Product = () => {
       </VStack>
     )
   );
+};
+
+export const getServerSideProps: GetServerSideProps<PropTypes> = async (
+  context: GetServerSidePropsContext
+): Promise<GetServerSidePropsResult<PropTypes>> => {
+  const { productSlug } = context.query;
+
+  const response: Response = await fetch(
+    `${process.env.API_V1}/api/product/${productSlug}`
+  );
+  const product: IProduct = await response.json();
+
+  if (product) {
+  } else {
+    // Page redirect
+    context.res.writeHead(302, { Location: "/redirect-page" });
+    context.res.end();
+    return { props: {} as PropTypes };
+  }
+
+  return {
+    props: {
+      product: product,
+    },
+  };
 };
 
 export default Product;

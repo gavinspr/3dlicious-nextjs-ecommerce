@@ -12,3 +12,4 @@ export { default as ManageGrid } from "./ManageGrid/ManageGrid";
 export { default as ProductCarousel } from "./ProductCarousel/ProductCarousel";
 export { default as ProductCard } from "./ProductCard/ProductCard";
 export { default as ScrollToTopButton } from "./ScrollToTopButton/ScrollToTopButton";
+export { default as SeeAllCard } from "./SeeAllCard/SeeAllCard";

@@ -2,37 +2,28 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../utils/mongo";
 import { Product } from "../../../models";
 
-type Data = {
-  name: string;
-};
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
-  const {
-    query: { id },
-    method,
-  } = req;
-
   await dbConnect();
 
-  switch (method) {
+  switch (req.method) {
     case "GET":
       const product = await Product.findOne({
-        slug: id,
+        slug: req.query.slug,
       });
 
       if (!product) {
         // todo:
         // throw new NotFoundException('Product not found.');
-        console.log("no");
       }
 
       res.status(200).json(product);
       break;
 
     default:
+      res.status(405).json({ message: "Method Not Allowed" });
       break;
   }
 }

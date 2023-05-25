@@ -1,61 +1,31 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import ProductCard from "./ProductCard";
+import React from "react";
+import ProductCard from "./ProductCard/ProductCard";
 import { IProduct } from "../models";
-import { Heading, SimpleGrid, VStack } from "@chakra-ui/react";
+import { VStack, Flex } from "@chakra-ui/react";
 
 type ProductGridProps = {
-  title: string;
+  products: any;
+  setPreviewData: any;
+  setShowPreviewModal: any;
 };
 
-const ProductGrid = ({ title }: ProductGridProps) => {
-  const [products, setProducts] = useState<IProduct[]>();
-
-  const fetchProducts = async () => {
-    try {
-      const res = await axios.get(
-        `/api/product?product_type=${title?.toLowerCase()}`
-      );
-
-      setProducts(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, [title]);
-
+const ProductGrid = ({
+  products,
+  setPreviewData,
+  setShowPreviewModal,
+}: ProductGridProps) => {
   return (
-    <VStack w="65%" align="left">
-      <Heading fontSize={30}>
-        {/* //todo: ? title scheme change */}
-        All {title![0].toUpperCase() + title!.slice(1).toLowerCase()}:
-      </Heading>
-      <SimpleGrid
-        p={2}
-        h="52vh" // todo:
-        columns={3}
-        spacing={14}
-        overflow="auto"
-        css={{
-          "&::-webkit-scrollbar": {
-            width: "4px",
-          },
-          "&::-webkit-scrollbar-track": {
-            width: "6px",
-          },
-          "&::-webkit-scrollbar-thumb": {
-            background: "#3182CE",
-            borderRadius: "24px",
-          },
-        }}
-      >
+    <VStack w="100%" align="left">
+      <Flex pl={4} overflow="auto" flexWrap="wrap">
         {products?.map((product: IProduct, index: number) => (
-          <ProductCard key={index} product={product} />
+          <ProductCard
+            key={`${product._id}`}
+            product={product}
+            setPreviewData={setPreviewData}
+            setShowPreviewModal={setShowPreviewModal}
+          />
         ))}
-      </SimpleGrid>
+      </Flex>
     </VStack>
   );
 };
