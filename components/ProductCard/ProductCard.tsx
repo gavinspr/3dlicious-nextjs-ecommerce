@@ -1,17 +1,9 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Link from "next/link";
 import { IProduct } from "../../models/Product";
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Image,
-  transition,
-  VStack,
-} from "@chakra-ui/react";
-import Rating from "./Rating";
-import TimeAndServing from "./TimeAndServing";
+import { Box, Button, Flex, Heading, Image, VStack } from "@chakra-ui/react";
+import Rating from "../Rating/Rating";
+import TimeAndServing from "../TimeAndServing/TimeAndServing";
 
 type ProductCardProps = {
   product: IProduct;
@@ -37,7 +29,6 @@ const ProductCard = ({
         h="40vh"
         w="25%"
         minW="25%"
-        // border="1px solid red"
         cursor="pointer"
         p={2}
         mb={8}
@@ -62,12 +53,11 @@ const ProductCard = ({
             <Button
               pos="absolute"
               bottom="10"
-              outline="1px solid red"
               w={20}
               left="0"
               right="0"
               margin="0 auto"
-              // _hover={{ transform: "scale(1.05)" }}
+              colorScheme="blue"
               onClick={(e) => {
                 e.stopPropagation();
                 handleShowPreview();
@@ -79,7 +69,6 @@ const ProductCard = ({
         </Box>
         <Heading
           w="100%"
-          // outline="1px solid red"
           alignSelf="flex-start"
           fontSize={20}
           overflow="hidden"
@@ -87,15 +76,11 @@ const ProductCard = ({
         >
           {product.name}
         </Heading>
-
-        <Flex
-          w="100%"
-          // outline="1px solid blue"
-        >
-          <Rating rating={product.rating} review_count={product.review_count} />
+        <Flex w="100%" justifyContent="space-between">
+          <Rating rating={product.rating} reviewCount={product.review_count} />
           {product.cook_time && product.servings && (
             <TimeAndServing
-              cook_time={product.cook_time}
+              cookTime={product.cook_time}
               servings={product.servings}
             />
           )}

@@ -3,16 +3,16 @@ import { Flex, HStack, Icon, Text } from "@chakra-ui/react";
 import { IoIosPeople, IoMdStopwatch } from "react-icons/io";
 
 type PropTypes = {
-  cook_time: number;
+  cookTime: number;
   servings: number;
 };
 
-const TimeAndServing = ({ cook_time, servings }: PropTypes) => {
+const TimeAndServing = ({ cookTime, servings }: PropTypes) => {
   return (
-    <Flex w="50%" justify="flex-end">
-      <HStack pr={1} justify="end" _hover={{ cursor: "pointer" }}>
+    <Flex justify="flex-end">
+      <HStack pr={1} justify="end">
         <HStack spacing={0}>
-          <Text fontSize={15}>{cook_time}</Text>
+          <Text fontSize={15}>{cookTime}</Text>
           <Icon as={IoMdStopwatch} w="60%" h={4} color="gray" />
         </HStack>
         <HStack spacing={1}>

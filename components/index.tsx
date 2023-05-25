@@ -13,3 +13,5 @@ export { default as ProductCarousel } from "./ProductCarousel/ProductCarousel";
 export { default as ProductCard } from "./ProductCard/ProductCard";
 export { default as ScrollToTopButton } from "./ScrollToTopButton/ScrollToTopButton";
 export { default as SeeAllCard } from "./SeeAllCard/SeeAllCard";
+export { default as Rating } from "./Rating/Rating";
+export { default as TimeAndServing } from "./TimeAndServing/TimeAndServing";
