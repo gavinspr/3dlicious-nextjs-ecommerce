@@ -1,82 +1,90 @@
 import React from "react";
-import { ContactDetails, CONTACT_DETAILS } from "../constants";
-import {
-  Box,
-  Heading,
-  HStack,
-  IconButton,
-  Image,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-
-// todo: add "real" info and links to contact icons
+import { Flex, Heading, Image, Text } from "@chakra-ui/react";
 
 const About = () => {
   return (
-    <VStack h="56vh" w="65%" mt={-10}>
-      <VStack w="70%" textAlign="justify">
-        <Heading>3Dlicious: Meals On Demand</Heading>
-        <HStack>
-          <Text w="60%">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-            lacinia risus id cursus tempor. Nam ornare consectetur mattis.
-            Praesent vitae arcu sit amet purus pulvinar congue ut eget risus.
-            Cras ut ipsum in nisl tempor lobortis. Integer in faucibus risus,
-            sagittis venenatis erat. Integer molestie eros orci, at vulputate
-            nisl blandit et. Donec pharetra venenatis libero nec volutpat.
-            Vivamus id lorem fermentum, consequat magna congue, accumsan felis.
-            Fusce a hendrerit ipsum. In lobortis et mi vitae tincidunt. Nulla
-            sit amet accumsan nisi, eu faucibus justo. Suspendisse potenti. In
-            molestie lorem pulvinar arcu posuere vulputate. Ut viverra velit ut
-            nulla accumsan cursus. Ut auctor mi diam, sit amet tristique sem
-            lacinia quis. Quisque vitae urna tempus, sollicitudin arcu eget,
-            mollis lectus.
-          </Text>
-          <Box w="40%">
-            <Image boxSize="fit-content" src="/logo.svg" />
-          </Box>
-        </HStack>
+    <Flex flexDir="column" w="80%">
+      <Flex
+        borderBottom="5px solid"
+        borderColor="green.600"
+        gap={5}
+        align="flex-end"
+        mb={5}
+      >
+        <Heading fontWeight="normal" cursor="pointer">
+          About 3Dlicious
+        </Heading>
+      </Flex>
+      <Flex flexDir="column" gap={5} mb={5} fontSize={22}>
         <Text>
-          Mauris ac urna ac justo tincidunt ullamcorper ac id leo. Curabitur
-          finibus, diam a sollicitudin imperdiet, ante elit rhoncus est, eu
-          imperdiet odio lectus ac nisi. Suspendisse vulputate orci laoreet,
-          laoreet sapien vel, euismod nisl. Nulla sit amet interdum nibh, vel
-          venenatis lacus. Nulla non tincidunt ante. Nunc id eros mattis,
-          rhoncus ex et, sollicitudin elit. Sed vel nibh blandit, laoreet mauris
-          eget, sollicitudin leo. Morbi eu mauris egestas, aliquet lectus id,
-          tempus diam. In sodales accumsan tellus a imperdiet. Nam et tellus
-          commodo, rhoncus dolor eu, viverra est. Fusce nec posuere lectus.
-          Aenean viverra massa justo, sit amet sagittis justo bibendum rhoncus.
-          Pellentesque nec velit erat. Etiam dignissim convallis elit, ut
-          hendrerit velit egestas quis. Nulla fermentum aliquet elit vitae
-          vestibulum. Sed rutrum porttitor nisl.
+          At 3Dlicious, we are a leading name in the world of 3D printing food.
+          Since our inception in 2037, we have been on a mission to redefine the
+          way people experience and interact with food. With our cutting-edge
+          technology, we bring culinary imagination to life, offering a wide
+          range of delectable creations that push the boundaries of flavor,
+          design, and convenience.
         </Text>
-        <Text pt={2}>
-          Morbi sodales porta quam, vitae rutrum ligula. Nulla rutrum ultricies
-          consequat. Aliquam bibendum dolor pellentesque velit tincidunt, sit
-          amet faucibus libero rhoncus. Fusce ac auctor tellus. Curabitur
-          molestie magna neque, in dictum dolor laoreet vel. Duis in lectus
-          lectus. Cras bibendum ligula sed turpis mattis pellentesque. Nullam
-          sem ante, varius at viverra id, imperdiet a orci. Proin at ligula
-          eros. Donec leo quam, blandit ut nisi a, rhoncus dapibus nibh. Fusce
-          dolor est, placerat eu rutrum nec, pellentesque vitae urna.
+        <Text>
+          In 2037, a team of passionate food enthusiasts and technology experts
+          came together with a shared vision: to merge the realms of gastronomy
+          and innovation. Driven by our love for extraordinary flavors and a
+          desire to revolutionize the food industry, we embarked on a journey
+          that would shape the future of dining.
         </Text>
-      </VStack>
-      <HStack>
-        {CONTACT_DETAILS.map(
-          ({ name, color, link, icon }: ContactDetails, index: number) => (
-            <IconButton
-              key={index}
-              background={`${color}.500`}
-              icon={icon}
-              aria-label={`${name} Contact`}
-              _hover={{ background: `${color}.300` }}
-            />
-          )
-        )}
-      </HStack>
-    </VStack>
+        <Text>
+          With relentless dedication and meticulous craftsmanship, we developed
+          state-of-the-art 3D printers specifically designed for creating edible
+          masterpieces. Combining the finest ingredients with precise
+          engineering, we unlocked a whole new world of culinary possibilities.
+        </Text>
+        <Text>
+          Using our proprietary software, we meticulously craft each detail,
+          ensuring that every dish is a testament to our commitment to
+          excellence. This revolutionary technology allows us to create
+          intricate textures, shapes, and flavors that were once unimaginable.
+          From delicate patterns adorning desserts to intricate layers in savory
+          dishes, our software enables us to elevate your dining experience to
+          new heights.
+        </Text>
+        <Text>
+          At 3Dlicious, we believe that food should be an immersive experience
+          that engages all your senses. We take pride in delivering not only
+          exceptional taste but also captivating visual presentations that leave
+          a lasting impression on your guests. Whether you're hosting an
+          intimate gathering or a grand celebration, our 3D-printed delicacies
+          are sure to elevate your dining experience to new heights.
+        </Text>
+        <Text>
+          But our passion for innovation doesn't stop at the food itself. We
+          also provide a comprehensive range of 3D printing supplies,
+          accessories, and resources, empowering individuals and businesses to
+          explore their own culinary creativity. From hobbyists and aspiring
+          chefs to professional caterers and event planners, our goal is to
+          inspire and enable everyone to unleash their imagination in the
+          kitchen.
+        </Text>
+        <Text>
+          Join us on this exciting journey into the future of food. Experience
+          the extraordinary with 3Dlicious and let your taste buds embark on a
+          truly unique culinary adventure. Welcome to a world where innovation
+          meets flavor, and where your wildest gastronomic dreams become a
+          delicious reality.
+        </Text>
+      </Flex>
+      <Heading textAlign="center" my={5}>
+        {" "}
+        Embrace the Future of Food
+      </Heading>
+      <Image
+        alignSelf="center"
+        w={275}
+        h={275}
+        mb={-5}
+        src="/logo.svg"
+        aria-label="3Dlicious logo"
+        _hover={{ cursor: "pointer" }}
+      />
+    </Flex>
   );
 };
 

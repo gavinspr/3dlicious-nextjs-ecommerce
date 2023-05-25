@@ -13,7 +13,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Head>
-        <title>3Dlicious</title>
+        <title>3Dlicious - Embrace the Future of Food</title>
       </Head>
       <header>
         <Navbar />
