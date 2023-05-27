@@ -4,7 +4,7 @@ import Link from "next/link";
 
 type PropTypes = {
   name: string;
-  currentPage: string;
+  currentPage: boolean;
   onMouseEnter: MouseEventHandler<HTMLParagraphElement>;
 };
 
@@ -12,12 +12,11 @@ const NavbarItem = ({ name, currentPage, onMouseEnter }: PropTypes) => {
   return (
     <Link href={`/${name}`}>
       <Text
-        color={currentPage === name ? "green" : "black"}
+        color={currentPage ? "green" : "black"}
         onMouseEnter={onMouseEnter}
         cursor="pointer"
         _hover={{
-          transform: "scale(1.2)",
-          transition: "350ms ease all",
+          textDecor: "underline",
         }}
       >
         {name.toUpperCase()}
