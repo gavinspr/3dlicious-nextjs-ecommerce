@@ -1,23 +1,24 @@
-import { model, models, ObjectId, Schema } from 'mongoose'
+import { model, models, ObjectId, Schema } from "mongoose";
 
 // todo: relate to product category & sub categories
 // todo: link to reviews
 // nutritional_facts: Record<string, string> | null // todo: make into linking object
 // required_supplies: Record<string, string> | null // todo: make into linking object
 export interface IProduct {
-  _id: ObjectId
-  name: string
-  slug: string
-  product_category: ObjectId | string
-  sub_categories: Array<ObjectId | string>
-  image_url: string | null
-  price: number
-  rating: number // out of 5
-  review_count: number
-  stock_count: number | null
-  cook_time: number | null
-  servings: number | null
-  description: string
+  _id: ObjectId;
+  name: string;
+  slug: string;
+  product_category: ObjectId | string;
+  sub_categories: Array<ObjectId | string>;
+  image_url: string | null;
+  price: number;
+  rating: number; // out of 5
+  review_count: number;
+  stock_count: number | null;
+  cook_time: number | null;
+  servings: number | null;
+  description: string;
+  isDigital: boolean; // Item only needs to be bought once
 }
 
 const productSchema = new Schema<IProduct>(
@@ -26,13 +27,13 @@ const productSchema = new Schema<IProduct>(
     slug: { type: String, required: true, unique: true },
     product_category: {
       type: Schema.Types.ObjectId,
-      ref: 'ProductCategory',
+      ref: "ProductCategory",
       required: true,
     },
     sub_categories: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'SubCategory',
+        ref: "SubCategory",
         required: true,
       },
     ],
@@ -44,12 +45,13 @@ const productSchema = new Schema<IProduct>(
     cook_time: { type: Number, default: null },
     servings: { type: Number, default: null },
     description: { type: String, required: true },
+    isDigital: { type: Boolean, default: false },
   },
   {
     timestamps: true,
-  },
-)
+  }
+);
 
-const Product = models.Product || model<IProduct>('Product', productSchema)
+const Product = models.Product || model<IProduct>("Product", productSchema);
 
-export default Product
+export default Product;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Cart from "../Cart";
+import Cart from "../Cart/Cart";
 import { HStack, Image, Tooltip, Flex } from "@chakra-ui/react";
 import { useRouter, NextRouter } from "next/router";
 import NavbarItem from "./NavbarItem";
@@ -26,7 +26,6 @@ const Navbar = () => {
   return (
     <Flex
       px="2%"
-      pt="1%"
       align="center"
       position="relative"
       borderBottom="20px solid"
@@ -34,8 +33,8 @@ const Navbar = () => {
     >
       <Link href="/">
         <Image
-          w={225}
-          h={225}
+          w={200}
+          h={200}
           mr={5}
           src="/logo.svg"
           aria-label="3Dlicious logo"
@@ -48,6 +47,7 @@ const Navbar = () => {
         onMouseLeave={() => setShowMenu(false)}
         fontSize={20}
         fontWeight="bold"
+        align="center"
       >
         <NavbarMenu
           name="store"
@@ -73,7 +73,7 @@ const Navbar = () => {
           onMouseEnter={() => setShowMenu(false)}
         />
       </HStack>
-      <HStack pos="absolute" top="10%" right="4%" spacing={30}>
+      <HStack pos="absolute" top="12%" right="4%" spacing={30}>
         <Cart />
         <Link href="/account">
           <Tooltip label="Account">

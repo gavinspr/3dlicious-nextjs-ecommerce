@@ -18,6 +18,7 @@ const NavbarItem = ({ name, currentPage, onMouseEnter }: PropTypes) => {
         _hover={{
           textDecor: "underline",
         }}
+        fontSize={24}
       >
         {name.toUpperCase()}
       </Text>

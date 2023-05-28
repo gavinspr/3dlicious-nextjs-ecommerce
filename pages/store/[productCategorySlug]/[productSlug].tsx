@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { IProduct } from "../../../models";
-import { Rating, SupplyItem, TimeAndServing } from "../../../components";
+import {
+  AddToCart,
+  Rating,
+  SupplyItem,
+  TimeAndServing,
+} from "../../../components";
 import { TiShoppingCart } from "react-icons/ti";
 import { Button, Center, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { useCartContext } from "../../../context";
@@ -27,21 +32,13 @@ const Product = ({ product }: PropTypes) => {
   const [inCart, setInCart] = useState<boolean | undefined>(undefined);
 
   const router = useRouter();
-  console.log(product);
-  console.log(router);
-  // !
-  const { addCartItem, isInCart } = useCartContext();
 
-  const handleAddToCart = () => {
-    addCartItem(product!);
-    if (!inCart) setInCart(true);
-  };
+  const { addCartItem, isInCart, cartItems } = useCartContext();
 
-  // !
   useEffect(() => {
     const isItemInCart: boolean = isInCart(product);
     setInCart(isItemInCart);
-  }, []);
+  }, [cartItems]);
 
   return (
     <Flex flexDir="column" w="85%">
@@ -83,19 +80,11 @@ const Product = ({ product }: PropTypes) => {
             ${product.price}
           </Text>
           {inCart !== undefined && (
-            <Button
-              mt={5}
-              w="60%"
-              size="lg"
-              iconSpacing={6}
-              colorScheme="green"
-              borderWidth={2}
-              rightIcon={<TiShoppingCart size={25} />}
-              variant={inCart ? "outline" : "solid"}
-              onClick={handleAddToCart}
-            >
-              {inCart ? "Item In Cart" : "Add To Cart"}
-            </Button>
+            <AddToCart
+              inCart={inCart}
+              addToCart={() => addCartItem(product)}
+              alreadyOwned={false} //todo:
+            />
           )}
         </Flex>
       </Flex>

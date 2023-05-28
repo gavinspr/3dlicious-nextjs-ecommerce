@@ -1,6 +1,6 @@
 import React from "react";
-import ProductCard from "./ProductCard/ProductCard";
-import { IProduct } from "../models";
+import ProductCard from "../ProductCard/ProductCard";
+import { IProduct } from "../../models";
 import { VStack, Flex } from "@chakra-ui/react";
 
 type ProductGridProps = {

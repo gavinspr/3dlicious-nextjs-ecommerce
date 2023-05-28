@@ -33,13 +33,14 @@ const NavbarMenu = ({
     <Menu isOpen={isOpen}>
       <Link href={`/${name}`}>
         <MenuButton
+          mt={0.5}
           p={0}
           as={Button}
           background="transparent"
           onClick={() => setIsOpen(false)}
           onMouseEnter={() => setIsOpen(true)}
           color={currentPage ? "green" : "black"}
-          fontSize={20}
+          fontSize={24}
           _expanded={{ background: "none" }}
           _focus={{ outline: "none" }}
           _hover={{
