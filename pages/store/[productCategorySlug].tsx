@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalFooter,
-  Button,
-  Flex,
-} from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { IProduct, IProductCategory } from "../../models";
 import {
   GetServerSideProps,
   GetServerSidePropsContext,
   GetServerSidePropsResult,
 } from "next";
-import { ProductGrid } from "../../components";
+import { ProductGrid, ProductPreviewModal } from "../../components";
 
 // todo: handle for category with no subs
 
@@ -30,6 +20,11 @@ const Store = ({ productCategory, products }: PropTypes) => {
     undefined
   );
   const [showPreviewModal, setShowPreviewModal] = useState<boolean>(false);
+
+  const handlePreviewModalClose = () => {
+    setShowPreviewModal(false);
+    setPreviewData(undefined);
+  };
 
   return (
     <>
@@ -52,28 +47,12 @@ const Store = ({ productCategory, products }: PropTypes) => {
           setShowPreviewModal={setShowPreviewModal}
         />
       </Flex>
-      <Modal
+      <ProductPreviewModal
         isOpen={showPreviewModal}
-        onClose={() => setShowPreviewModal(false)}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>{/* <Lorem count={2} /> */}</ModalBody>
-
-          <ModalFooter>
-            <Button
-              colorScheme="blue"
-              mr={3}
-              onClick={() => setShowPreviewModal(false)}
-            >
-              Close
-            </Button>
-            <Button variant="ghost">Secondary Action</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+        onClose={handlePreviewModalClose}
+        product={previewData}
+        slug={`/store/${productCategory.slug}/${previewData?.slug}`}
+      />
     </>
   );
 };
