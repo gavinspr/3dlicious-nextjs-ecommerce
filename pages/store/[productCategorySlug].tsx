@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Flex } from "@chakra-ui/react";
 import { IProduct, IProductCategory } from "../../models";
 import {
@@ -12,18 +12,68 @@ import { ProductGrid, ProductPreviewModal } from "../../components";
 
 type PropTypes = {
   productCategory: IProductCategory;
-  products: Array<IProduct>;
+  initialProducts: Array<IProduct>;
+  totalPages: number;
 };
 
-const Store = ({ productCategory, products }: PropTypes) => {
+const Store = ({ productCategory, initialProducts, totalPages }: PropTypes) => {
   const [previewData, setPreviewData] = useState<IProduct | undefined>(
     undefined
   );
   const [showPreviewModal, setShowPreviewModal] = useState<boolean>(false);
+  const [products, setProducts] = useState<Array<IProduct>>(initialProducts);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const page = useRef<number>(1);
+  const hasMore = useRef<boolean>(true);
 
   const handlePreviewModalClose = () => {
     setShowPreviewModal(false);
     setPreviewData(undefined);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!hasMore.current) return;
+
+      const scrollHeight = document.documentElement.scrollHeight;
+      const scrollTop = document.documentElement.scrollTop;
+      const clientHeight = document.documentElement.clientHeight;
+      const distanceToBottom = scrollHeight - scrollTop - clientHeight;
+
+      const responsiveDistance = Math.max(1000, 0.2 * window.innerHeight);
+
+      if (distanceToBottom < responsiveDistance) {
+        fetchMoreProducts();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const fetchMoreProducts = async () => {
+    if (isLoading || !hasMore.current) return;
+    setIsLoading(true);
+
+    try {
+      page.current++;
+
+      const response: Response = await fetch(
+        `/api/product?productCategory=${productCategory._id}&latest=true&page=${page.current}`
+      );
+      const data = await response.json();
+      const newProducts = data.products;
+
+      setProducts((prevProducts) => [...prevProducts, ...newProducts]);
+
+      if (page.current >= totalPages) hasMore.current = false;
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -68,14 +118,16 @@ export const getServerSideProps: GetServerSideProps<PropTypes> = async (
   const productCategory: Array<IProductCategory> = await response.json();
 
   let products: Array<IProduct> = [];
+  let totalPages: number;
 
   if (productCategory[0]) {
     const response: Response = await fetch(
       `${process.env.API_V1}/api/product?productCategory=${productCategory[0]._id}&latest=true`
     );
-    const data: Array<IProduct> = await response.json();
+    const data: any = await response.json();
 
-    products = data;
+    products = data.products;
+    totalPages = data.totalPages;
   } else {
     // Page redirect
     context.res.writeHead(302, { Location: "/redirect-page" });
@@ -86,7 +138,8 @@ export const getServerSideProps: GetServerSideProps<PropTypes> = async (
   return {
     props: {
       productCategory: productCategory[0],
-      products: products,
+      initialProducts: products,
+      totalPages: totalPages,
     },
   };
 };

@@ -16,7 +16,7 @@ const ProductGrid = ({
 }: ProductGridProps) => {
   return (
     <VStack w="100%" align="left">
-      <Flex pl={4} overflow="auto" flexWrap="wrap">
+      <Flex pl={4} flexWrap="wrap">
         {products?.map((product: IProduct, index: number) => (
           <ProductCard
             key={`${product._id}`}

@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../utils/mongo";
 import { Product, IProduct } from "../../../models";
+import { fetchProductByProductCategoryId } from "../../../controllers";
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,6 +13,18 @@ export default async function handler(
     case "GET":
       let products: Array<IProduct> = [];
 
+      const page: number = req.query.page ? Number(req.query.page) : 1;
+      const limit: number = 10;
+      const skip: number = (page - 1) * limit;
+
+      // ! filters will affect these calculations
+      const currentPage: number = Math.floor(skip / limit) + 1;
+      const totalCount: number = await Product.countDocuments();
+      const totalPages: number = Math.ceil(totalCount / limit);
+
+      // todo: add to controller
+      // todo: add pagination
+      // todo: updated filter by subcategory method
       if (req.query.subCategory) {
         // If preview param passed only return 10 products
         if (req.query.preview) {
@@ -30,23 +43,20 @@ export default async function handler(
       }
 
       if (req.query.productCategory) {
-        // If preview param passed only return 10 products
-        if (req.query.latest) {
-          products = await Product.find({
-            product_category: req.query.productCategory,
-          }).sort({ createdAt: -1 });
+        products = await fetchProductByProductCategoryId(
+          req.query.productCategory as string,
+          skip,
+          limit,
+          "latest"
+        );
 
-          return res.status(200).json(products);
-        }
-
-        products = await Product.find({
-          product_category: req.query.productCategory,
-        });
-        return res.status(200).json(products);
+        return res
+          .status(200)
+          .json({ products, currentPage, totalCount, totalPages });
       }
 
-      products = await Product.find();
-      res.status(200).json(products);
+      products = await Product.find().skip(skip).limit(limit);
+      res.status(200).json({ products, currentPage, totalCount, totalPages });
       break;
     case "POST":
       try {

@@ -27,10 +27,6 @@ type PropTypes = {
 };
 
 const ProductPreviewModal = ({ isOpen, onClose, product, slug }: PropTypes) => {
-  React.useEffect(() => {
-    console.log(product, "p");
-  }, [product]);
-
   const { addCartItem, isInCart } = useCartContext();
 
   return (
